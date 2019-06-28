@@ -1,11 +1,11 @@
 package dev.rodni.ru.mvvmkotlinedu.ui.auth
 
-import androidx.lifecycle.LiveData
+import dev.rodni.ru.mvvmkotlinedu.data.db.entity.User
 
 interface AuthListener {
 
     fun onStarted()
-    fun onSuccess(loginResponse: LiveData<String>)
+    fun onSuccess(user: User)
     fun onFailure(message: String)
 
 }
