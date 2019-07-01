@@ -26,6 +26,8 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         binding.viewmodel = viewModel
 
         viewModel.authListener = this
+
+        progressbar_login.hide()
     }
 
     override fun onStarted() {

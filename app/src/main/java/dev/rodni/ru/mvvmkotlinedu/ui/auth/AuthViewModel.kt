@@ -3,6 +3,7 @@ package dev.rodni.ru.mvvmkotlinedu.ui.auth
 import android.view.View
 import androidx.lifecycle.ViewModel
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
+import dev.rodni.ru.mvvmkotlinedu.util.ApiException
 import dev.rodni.ru.mvvmkotlinedu.util.Coroutines
 
 class AuthViewModel : ViewModel() {
@@ -24,12 +25,20 @@ class AuthViewModel : ViewModel() {
         //success
         //fix dependencies later using dependency injection kodein thing
         Coroutines.main {
-            val response = UserRepository().userLogin(email!!, password!!)
-            if (response.isSuccessful) {
-                authListener?.onSuccess(response.body()?.user!!)
-            } else {
-                authListener?.onFailure("error code: ${response.code()}")
+
+            try {
+                val authResponse = UserRepository().userLogin(email!!, password!!)
+
+                authResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    return@main
+                }
+                authListener?.onFailure(authResponse.message!!)
+
+            } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
             }
+
         }
     }
 }
