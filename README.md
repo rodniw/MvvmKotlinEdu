@@ -1,4 +1,4 @@
-APP STATE: The very first test at the phone.
+APP STATE: Next step is to use Kodein.
 
 Here i have a very small app. I am just practicing in using Kotlin in some different projects with different architectures.
 
