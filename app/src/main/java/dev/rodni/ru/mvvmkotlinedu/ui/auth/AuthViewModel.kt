@@ -6,7 +6,9 @@ import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.util.ApiException
 import dev.rodni.ru.mvvmkotlinedu.util.Coroutines
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel(
+    private val repository: UserRepository
+) : ViewModel() {
 
     var email: String? = null
     var password: String? = null
@@ -27,7 +29,7 @@ class AuthViewModel : ViewModel() {
         Coroutines.main {
 
             try {
-                val authResponse = UserRepository().userLogin(email!!, password!!)
+                val authResponse = repository.userLogin(email!!, password!!)
 
                 authResponse.user?.let {
                     authListener?.onSuccess(it)

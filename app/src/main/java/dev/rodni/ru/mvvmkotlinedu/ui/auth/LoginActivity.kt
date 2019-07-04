@@ -8,7 +8,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import dev.rodni.ru.mvvmkotlinedu.R
+import dev.rodni.ru.mvvmkotlinedu.data.db.AppDatabase
 import dev.rodni.ru.mvvmkotlinedu.data.db.entity.User
+import dev.rodni.ru.mvvmkotlinedu.data.network.MyApi
 import dev.rodni.ru.mvvmkotlinedu.databinding.ActivityLoginBinding
 import dev.rodni.ru.mvvmkotlinedu.util.hide
 import dev.rodni.ru.mvvmkotlinedu.util.show
@@ -20,6 +22,9 @@ class LoginActivity : AppCompatActivity(), AuthListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val api = MyApi()
+        val db = AppDatabase(this)
 
         //activitylogingbinding is some automatically generated class from xml activity_login
         val binding : ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)

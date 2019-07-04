@@ -13,7 +13,7 @@ import dev.rodni.ru.mvvmkotlinedu.data.db.entity.User
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upser(user: User) : Long
+    fun upsert(user: User) : Long
 
     @Query("SELECT * FROM user WHERE uid = $CURRENT_USER_ID")
     fun getUser() : LiveData<User>
