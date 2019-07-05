@@ -1,38 +1,31 @@
 package dev.rodni.ru.mvvmkotlinedu.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import dev.rodni.ru.mvvmkotlinedu.R
-import dev.rodni.ru.mvvmkotlinedu.data.db.AppDatabase
 import dev.rodni.ru.mvvmkotlinedu.data.db.entity.User
-import dev.rodni.ru.mvvmkotlinedu.data.network.MyApi
-import dev.rodni.ru.mvvmkotlinedu.data.network.NetworkConnectionInterceptor
-import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.databinding.ActivityLoginBinding
 import dev.rodni.ru.mvvmkotlinedu.ui.home.HomeActivity
 import dev.rodni.ru.mvvmkotlinedu.util.hide
 import dev.rodni.ru.mvvmkotlinedu.util.show
 import dev.rodni.ru.mvvmkotlinedu.util.snackbar
-import dev.rodni.ru.mvvmkotlinedu.util.toast
 import kotlinx.android.synthetic.main.activity_login.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(), AuthListener {
+class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
+
+    override val kodein by kodein()
+
+    private val factory : AuthViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //TODO: use KodeIn
-        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
-        val api = MyApi(networkConnectionInterceptor)
-        val db = AppDatabase(this)
-        val repository = UserRepository(api, db)
-        val factory = AuthViewModelFactory(repository)
 
         //activitylogingbinding is some automatically generated class from xml activity_login
         val binding : ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
