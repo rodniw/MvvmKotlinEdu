@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.util.ApiException
 import dev.rodni.ru.mvvmkotlinedu.util.Coroutines
+import dev.rodni.ru.mvvmkotlinedu.util.NoInternetException
 
 class AuthViewModel(
     private val repository: UserRepository
@@ -41,6 +42,8 @@ class AuthViewModel(
                 authListener?.onFailure(authResponse.message!!)
 
             } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
+            } catch (e: NoInternetException) {
                 authListener?.onFailure(e.message!!)
             }
 

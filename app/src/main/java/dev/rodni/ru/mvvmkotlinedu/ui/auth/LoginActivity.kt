@@ -12,6 +12,7 @@ import dev.rodni.ru.mvvmkotlinedu.R
 import dev.rodni.ru.mvvmkotlinedu.data.db.AppDatabase
 import dev.rodni.ru.mvvmkotlinedu.data.db.entity.User
 import dev.rodni.ru.mvvmkotlinedu.data.network.MyApi
+import dev.rodni.ru.mvvmkotlinedu.data.network.NetworkConnectionInterceptor
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.databinding.ActivityLoginBinding
 import dev.rodni.ru.mvvmkotlinedu.ui.home.HomeActivity
@@ -26,7 +27,9 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val api = MyApi()
+        //TODO: use KodeIn
+        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+        val api = MyApi(networkConnectionInterceptor)
         val db = AppDatabase(this)
         val repository = UserRepository(api, db)
         val factory = AuthViewModelFactory(repository)
