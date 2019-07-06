@@ -11,13 +11,16 @@ class AuthViewModel(
     private val repository: UserRepository
 ) : ViewModel() {
 
+    var name: String? = null
     var email: String? = null
     var password: String? = null
+    var passwordConfirm: String? = null
 
     var authListener: AuthListener? = null
 
     fun getLoggedInUser() = repository.getUser()
 
+    //LOGIN
     fun onLoginBtnClick(view: View) {
         authListener?.onStarted()
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
@@ -28,11 +31,57 @@ class AuthViewModel(
         }
 
         //success
-        //fix dependencies later using dependency injection kodein thing
         Coroutines.main {
 
             try {
                 val authResponse = repository.userLogin(email!!, password!!)
+
+                authResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    repository.saveUser(it)
+                    return@main
+                }
+                authListener?.onFailure(authResponse.message!!)
+
+            } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
+            } catch (e: NoInternetException) {
+                authListener?.onFailure(e.message!!)
+            }
+
+        }
+    }
+
+    //SIGN UP
+    fun onSignUpBtnClick(view: View) {
+        authListener?.onStarted()
+
+        //onFailure
+        if (name.isNullOrEmpty()) {
+            authListener?.onFailure("Invalid name")
+            return
+        }
+
+        if (email.isNullOrEmpty()) {
+            authListener?.onFailure("Invalid email")
+            return
+        }
+
+        if (password.isNullOrEmpty()) {
+            authListener?.onFailure("Invalid password")
+            return
+        }
+
+        if (password != passwordConfirm) {
+            authListener?.onFailure("Please repeat the password correctly")
+            return
+        }
+
+        //success
+        Coroutines.main {
+
+            try {
+                val authResponse = repository.userSignUp(name!!, email!!, password!!)
 
                 authResponse.user?.let {
                     authListener?.onSuccess(it)
