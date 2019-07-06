@@ -17,11 +17,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.home.HomeActivity">
+        <activity android:name=".ui.home.HomeActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.auth.SignupActivity">
+        <activity android:name=".ui.auth.SignupActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.auth.LoginActivity">
+        <activity android:name=".ui.auth.LoginActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

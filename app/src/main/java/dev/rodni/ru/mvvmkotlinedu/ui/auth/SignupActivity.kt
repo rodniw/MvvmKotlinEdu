@@ -24,7 +24,8 @@ class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding : ActivitySignupBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
+        val binding : ActivitySignupBinding
+                = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         val viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
 
@@ -38,22 +39,6 @@ class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
                 }
             }
         })
-        /*
-        val binding : ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        val viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
-        binding.viewmodel = viewModel
-
-        viewModel.authListener = this
-
-        viewModel.getLoggedInUser().observe(this, Observer { user ->
-            if(user != null) {
-                Intent(this, HomeActivity::class.java).also {
-                    it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(it)
-                }
-            }
-        })
-         */
     }
 
     override fun onStarted() {

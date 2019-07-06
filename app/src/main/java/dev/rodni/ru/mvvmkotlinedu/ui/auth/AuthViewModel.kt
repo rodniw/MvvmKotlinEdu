@@ -7,6 +7,7 @@ import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.util.ApiException
 import dev.rodni.ru.mvvmkotlinedu.util.Coroutines
 import dev.rodni.ru.mvvmkotlinedu.util.NoInternetException
+import java.net.SocketTimeoutException
 
 class AuthViewModel(
     private val repository: UserRepository
@@ -47,6 +48,8 @@ class AuthViewModel(
             } catch (e: ApiException) {
                 authListener?.onFailure(e.message!!)
             } catch (e: NoInternetException) {
+                authListener?.onFailure(e.message!!)
+            } catch (e: SocketTimeoutException) {
                 authListener?.onFailure(e.message!!)
             }
 
