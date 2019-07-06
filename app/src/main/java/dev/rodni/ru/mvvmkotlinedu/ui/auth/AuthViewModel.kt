@@ -53,8 +53,16 @@ class AuthViewModel(
         }
     }
 
+    //FROM LOG IN PAGE TO THE SIGN UP PAGE
     fun onRegPageIntent(view: View) {
         Intent(view.context, SignupActivity::class.java).also {
+            view.context.startActivity(it)
+        }
+    }
+
+    //FROM SIGN UP PAGE TO THE LOG IN PAGE
+    fun onLogInPageIntent(view: View) {
+        Intent(view.context, LoginActivity::class.java).also {
             view.context.startActivity(it)
         }
     }

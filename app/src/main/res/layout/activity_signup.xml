@@ -15,16 +15,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            tools:ignore="TextFields"
             tools:context=".ui.auth.SignupActivity">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log in"
+                android:text="@string/sign_up_page"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp" android:id="@+id/logo"/>
         <EditText
+                android:text="@{viewmodel.name}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
@@ -32,19 +34,21 @@
                 android:id="@+id/name_registr" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="72dp"
-                app:layout_constraintTop_toBottomOf="@+id/logo" android:hint="name"/>
+                app:layout_constraintTop_toBottomOf="@+id/logo" android:hint="@string/name"/>
         <EditText
+                android:text="@{viewmodel.email}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:ems="10"
                 android:id="@+id/email_registr" android:layout_marginTop="12dp"
                 app:layout_constraintTop_toBottomOf="@+id/name_registr"
                 app:layout_constraintEnd_toEndOf="@+id/name_registr"
                 app:layout_constraintStart_toStartOf="@+id/name_registr"
-                android:hint="email"/>
+                android:hint="@string/email"/>
         <Button
-                android:text="Registration"
+                android:onClick="@{viewmodel::onSignUpBtnClick}"
+                android:text="@string/registration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/reg_btn_reg_page"
@@ -52,7 +56,8 @@
                 android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/repeat_password" android:layout_marginTop="24dp"/>
         <Button
-                android:text="LogIn"
+                android:onClick="@{viewmodel::onLogInPageIntent}"
+                android:text="@string/log_in_page"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_btn_reg_page" android:layout_marginTop="24dp"
@@ -60,21 +65,23 @@
                 android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"/>
         <EditText
+                android:text="@{viewmodel.passwordConfirm}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:ems="10"
-                android:id="@+id/repeat_password" android:hint="repeat password"
+                android:id="@+id/repeat_password" android:hint="@string/repeat_password"
                 app:layout_constraintTop_toBottomOf="@+id/password_registr" android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"/>
         <EditText
+                android:text="@{viewmodel.password}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:ems="10"
                 android:id="@+id/password_registr"
-                android:hint="password" app:layout_constraintTop_toBottomOf="@+id/email_registr"
+                android:hint="@string/password" app:layout_constraintTop_toBottomOf="@+id/email_registr"
                 android:layout_marginTop="12dp" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"/>
