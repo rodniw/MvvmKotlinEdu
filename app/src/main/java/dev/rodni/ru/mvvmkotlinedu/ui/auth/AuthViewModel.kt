@@ -1,5 +1,6 @@
 package dev.rodni.ru.mvvmkotlinedu.ui.auth
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModel
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
@@ -49,6 +50,12 @@ class AuthViewModel(
                 authListener?.onFailure(e.message!!)
             }
 
+        }
+    }
+
+    fun onRegPageIntent(view: View) {
+        Intent(view.context, SignupActivity::class.java).also {
+            view.context.startActivity(it)
         }
     }
 
