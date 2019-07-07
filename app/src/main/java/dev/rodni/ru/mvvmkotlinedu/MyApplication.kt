@@ -6,6 +6,7 @@ import dev.rodni.ru.mvvmkotlinedu.data.network.MyApi
 import dev.rodni.ru.mvvmkotlinedu.data.network.NetworkConnectionInterceptor
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.ui.auth.AuthViewModelFactory
+import dev.rodni.ru.mvvmkotlinedu.ui.home.profile.ProfileViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -26,6 +27,8 @@ class MyApplication : Application(), KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
+
+        bind() from provider { ProfileViewModelFactory(instance()) }
 
     }
 
