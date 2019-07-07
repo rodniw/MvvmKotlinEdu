@@ -10,4 +10,6 @@
     <string name="log_in">Log In</string>
     <string name="forget_password">Forget password?</string>
     <string name="welcome">Welcome</string>
+    <string name="home">Home</string>
+    <string name="quotes">Quotes</string>
 </resources>
