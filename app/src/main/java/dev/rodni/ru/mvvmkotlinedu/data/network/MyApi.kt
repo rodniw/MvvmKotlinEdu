@@ -1,12 +1,14 @@
 package dev.rodni.ru.mvvmkotlinedu.data.network
 
 import dev.rodni.ru.mvvmkotlinedu.data.network.responses.AuthResponse
+import dev.rodni.ru.mvvmkotlinedu.data.network.responses.QuotesResponse
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface MyApi {
@@ -26,8 +28,8 @@ interface MyApi {
         @Field("password") password: String
     ) : Response<AuthResponse>
 
-    //we clean our code by using Response<AuthResponse> instead of
-            //Call<ResponseBody>
+    @GET("quotes")
+    suspend fun getQuotes() : Response<QuotesResponse>
 
     companion object {
         operator fun invoke(
