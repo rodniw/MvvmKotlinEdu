@@ -40,6 +40,7 @@ class QuotesRepository(
         }
     }
 
+    //TODO: change to fetch only when we need it
     private fun isFetchNeeded() : Boolean {
         //temporary
         return true

@@ -8,6 +8,7 @@ import dev.rodni.ru.mvvmkotlinedu.data.repositories.QuotesRepository
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.ui.auth.AuthViewModelFactory
 import dev.rodni.ru.mvvmkotlinedu.ui.home.profile.ProfileViewModelFactory
+import dev.rodni.ru.mvvmkotlinedu.ui.home.quotes.QuotesViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -34,6 +35,7 @@ class MyApplication : Application(), KodeinAware {
         //vmfactories
         bind() from provider { AuthViewModelFactory(instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
+        bind() from provider { QuotesViewModelFactory(instance()) }
 
     }
 
