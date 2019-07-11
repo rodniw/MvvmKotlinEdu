@@ -4,6 +4,7 @@ import android.app.Application
 import dev.rodni.ru.mvvmkotlinedu.data.db.AppDatabase
 import dev.rodni.ru.mvvmkotlinedu.data.network.MyApi
 import dev.rodni.ru.mvvmkotlinedu.data.network.NetworkConnectionInterceptor
+import dev.rodni.ru.mvvmkotlinedu.data.preferences.PreferenceProvider
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.QuotesRepository
 import dev.rodni.ru.mvvmkotlinedu.data.repositories.UserRepository
 import dev.rodni.ru.mvvmkotlinedu.ui.auth.AuthViewModelFactory
@@ -27,10 +28,11 @@ class MyApplication : Application(), KodeinAware {
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
         bind() from singleton { MyApi(instance()) }
         bind() from singleton { AppDatabase(instance()) }
+        bind() from singleton { PreferenceProvider(instance())}
 
         //repos
         bind() from singleton { UserRepository(instance(), instance()) }
-        bind() from singleton { QuotesRepository(instance(), instance()) }
+        bind() from singleton { QuotesRepository(instance(), instance(), instance()) }
 
         //vmfactories
         bind() from provider { AuthViewModelFactory(instance()) }
