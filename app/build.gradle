@@ -12,7 +12,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "dev.rodni.ru.mvvmkotlinedu"
-        minSdkVersion 26
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -71,4 +71,12 @@ dependencies {
     //android navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05'
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha05'
+
+    //groupie
+    implementation 'com.xwray:groupie:2.3.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
+    implementation 'com.xwray:groupie-databinding:2.3.0'
+
+    // Better dateTime-time support even on older Android versions
+    implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
 }

@@ -10,10 +10,9 @@ import dev.rodni.ru.mvvmkotlinedu.data.preferences.PreferenceProvider
 import dev.rodni.ru.mvvmkotlinedu.util.Coroutines
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
+import org.threeten.bp.ZonedDateTime
 
-private val MINIMUMINTERVAL = 6
+//private val MINIMUMINTERVAL = 6
 
 class QuotesRepository(
     private val api: MyApi,
@@ -39,7 +38,7 @@ class QuotesRepository(
     private suspend fun fetchQuotes() {
         val lastSavedAt = prefs.getLastSavedAt()
 
-        if (lastSavedAt == null || isFetchNeeded(LocalDateTime.parse(lastSavedAt))) {
+        if (lastSavedAt == null || isFetchNeeded(ZonedDateTime.parse(lastSavedAt))) {
             val response = apiRequest {
                 api.getQuotes()
             }
@@ -48,14 +47,16 @@ class QuotesRepository(
         }
     }
 
-    private fun isFetchNeeded(savedAt: LocalDateTime): Boolean {
-        return ChronoUnit.HOURS.between(savedAt, LocalDateTime.now()) > MINIMUMINTERVAL
+    private fun isFetchNeeded(savedAt: ZonedDateTime): Boolean {
+        val threeMinutesAgo = ZonedDateTime.now().minusMinutes(3)
+        return savedAt.isBefore(threeMinutesAgo)
+        //return ChronoUnit.HOURS.between(savedAt, ZonedDateTime.now()) > MINIMUMINTERVAL
     }
 
     private fun saveQuotes(quotes: List<Quote>) {
         Coroutines.io {
             //TODO: change to my own impl instead of using LocalDateTime
-            prefs.saveLastSavedAt(LocalDateTime.now().toString())
+            prefs.saveLastSavedAt(ZonedDateTime.now().toString())
 
             db.getQuoteDao().saveAllQuotes(quotes)
         }
