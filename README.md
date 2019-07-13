@@ -1,5 +1,9 @@
-APP STATE: Working with the main page.
+This is a skeleton of an app. You can use it after simple changing of the BASE_URL constant, @Field 's, @Post and @Get methods inside MyApi.
 
-Here i have a very small app. I am just practicing in using Kotlin in some different projects with different architectures.
+Inside you will find functionality:
+1) Login
+2) Sign up
+3) Find user info
+4) Find list of "quotes"
 
 Inside this project i use MVVM, coroutines and Kodein.
