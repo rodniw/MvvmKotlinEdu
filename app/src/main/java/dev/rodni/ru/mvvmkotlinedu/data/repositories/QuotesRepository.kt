@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
-//private val MINIMUMINTERVAL = 6
+private val MINIMUMINTERVAL: Long = 3
 
 class QuotesRepository(
     private val api: MyApi,
@@ -48,14 +48,12 @@ class QuotesRepository(
     }
 
     private fun isFetchNeeded(savedAt: ZonedDateTime): Boolean {
-        val threeMinutesAgo = ZonedDateTime.now().minusMinutes(3)
+        val threeMinutesAgo = ZonedDateTime.now().minusMinutes(MINIMUMINTERVAL)
         return savedAt.isBefore(threeMinutesAgo)
-        //return ChronoUnit.HOURS.between(savedAt, ZonedDateTime.now()) > MINIMUMINTERVAL
     }
 
     private fun saveQuotes(quotes: List<Quote>) {
         Coroutines.io {
-            //TODO: change to my own impl instead of using LocalDateTime
             prefs.saveLastSavedAt(ZonedDateTime.now().toString())
 
             db.getQuoteDao().saveAllQuotes(quotes)

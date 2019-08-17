@@ -11,7 +11,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-private const val BASE_URL = ""
+private const val BASE_URL = "https://api.simplifiedcoding.in/course-apis/mvvm/"
 
 interface MyApi {
 
