@@ -7,3 +7,6 @@ Inside you will find functionality:
 4) Find list of "quotes"
 
 Inside this project i use MVVM, coroutines and Kodein.
+
+ONE MORE:
+TMDV MOVIE APP.
